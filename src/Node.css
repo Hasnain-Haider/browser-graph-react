@@ -1,0 +1,14 @@
+.node {
+    display: flex;
+    height: 50px;
+    width:  50px;
+    border: 2px solid black ;
+}
+
+.bottom {
+    border-bottom: 2px solid black;
+}
+
+.right {
+    border-right: 2px solid black;
+}
