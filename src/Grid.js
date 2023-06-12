@@ -4,21 +4,6 @@ import { useEffect, useState } from 'react';
 
 function Grid() {
     const [grid, setGrid] = useState([]);
-    // const { height, width, grid } = ApiCall;
-    // for (const x of Array(height).keys()) {
-    //     gridArray.push([]);
-    // }
-
-    // let i = 0;
-    // for (const row of grid) {
-    //   let array = gridArray[i];
-    //   for (const node of row) {
-    //     array.push(node.bounds);
-    //   }
-    //   i++;
-    // }
-
-
     const mapBoundariesToClassNames = cell => {
       let classNames = "";
       for (const boundary of cell.bounds) {
@@ -35,8 +20,7 @@ function Grid() {
     }
 
     useEffect(() => {
-      // fetch("http://localhost:8080/generatemaze")
-      fetch("http://graph-service:8080/generatemaze")
+      fetch("http://graph-api.hassu.us/generatemaze")
       .then(response => {
         if (response.ok) {
           return response.json()
@@ -62,16 +46,6 @@ function Grid() {
         { renderGrid() }
     </div>
   );
-}
-
-function get(node) {
-  /*
-          "id": "0,0",
-          "boundaries": [],
-          "row": 0,
-          "col": 0
-  */
-
 }
 
 export default Grid;
