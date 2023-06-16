@@ -20,7 +20,7 @@ function Grid() {
     }
 
     useEffect(() => {
-      fetch("http://graph-api.hassu.us/generatemaze")
+      fetch("http://graph-api.hassu.us/generatemaze?height=30&width=30")
       .then(response => {
         if (response.ok) {
           return response.json()
@@ -47,5 +47,7 @@ function Grid() {
     </div>
   );
 }
+
+
 
 export default Grid;
