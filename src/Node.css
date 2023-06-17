@@ -2,14 +2,16 @@
     display: flex;
     height: auto;
     width:  auto;
-    border: 2px dashed white ;
+    border: 1px dashed white ;
+    min-width: 4px;
+    min-height: 4px;
     flex-grow: 1;
 }
 
 .bottom {
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid black;
 }
 
 .right {
-    border-right: 2px solid black;
+    border-right: 1px solid black;
 }

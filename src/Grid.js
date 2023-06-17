@@ -2,8 +2,7 @@ import './Grid.css';
 import Node from './Node';
 import { useEffect, useState } from 'react';
 
-function Grid() {
-    const [grid, setGrid] = useState([]);
+function Grid({grid}) {
     const mapBoundariesToClassNames = cell => {
       let classNames = "";
       for (const boundary of cell.bounds) {
@@ -19,19 +18,7 @@ function Grid() {
       return classNames;
     }
 
-    useEffect(() => {
-      fetch("http://graph-api.hassu.us/generatemaze?height=30&width=30")
-      .then(response => {
-        if (response.ok) {
-          return response.json()
-        }
-        throw response;
-      })
-      .then(res => {
-        console.log(res);
-        setGrid(res.grid);
-      });
-    }, []);
+
     
     const renderGrid = () => grid.map((row, rowIndex) => (
         <div className="row" key={rowIndex}>
