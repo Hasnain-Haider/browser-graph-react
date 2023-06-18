@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 const DEFAULT_HEIGHT = 10;
 const DEFAULT_WIDTH = 10;
 
-const dev = true;
+const dev = false;
 function App() {
 
   const [height, setHeight] = useState(DEFAULT_HEIGHT);
