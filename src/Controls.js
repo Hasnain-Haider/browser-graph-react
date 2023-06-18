@@ -22,10 +22,11 @@ import "rc-tooltip/assets/bootstrap_white.css";
 
 function Controls({height, width, setHeight, setWidth, setGetMaze}) {
 
+const solveMaze = () => {}
 
 const Button = ({ onClick, children }) => {
     return (
-      <button type="button" className="generate-maze-btn" onClick={onClick}>
+      <button type="button" className="maze-btn" onClick={onClick}>
         {children}
       </button>
     );
@@ -42,6 +43,7 @@ const handleRenderHeight = (node, handleProps) => {
         </Tooltip>
       );
     }
+    
 
 const handleRenderWidth = (node, handleProps) => {
     return (
@@ -71,6 +73,9 @@ const handleRenderWidth = (node, handleProps) => {
         <div className="buttons">
             <div>
                 <Button onClick={setGetMaze}>Generate Maze !</Button>
+            </div>
+            <div>
+                <Button onClick={solveMaze}>Solve Maze For Me</Button>
             </div>
         </div>
     </div>

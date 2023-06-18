@@ -6,59 +6,43 @@ import { useEffect, useState } from 'react';
 const DEFAULT_HEIGHT = 10;
 const DEFAULT_WIDTH = 10;
 
+const dev = true;
 function App() {
 
   const [height, setHeight] = useState(DEFAULT_HEIGHT);
   const [width, setWidth] = useState(DEFAULT_WIDTH);
-  const [getMaze, setGetMaze] = useState(true);
+  const [getMaze, setGetMaze] = useState(false);
   const [grid, setGrid] = useState([]);
 
-
-  const curlGraphService = (height, width) => fetch(`http://graph-api.hassu.us/generatemaze?height=${height}&width=${width}`)
-    .then(response => {
-        if (response.ok) {
-          return response.json()
-        } else if (response.status === 409) {
-          alert('You have sent too many requests, please try again later');
-        }
-        throw response;
-      })
-
-     const setWidthApp = v => {
-        console.log('set wifth app to ' + v);
-        setWidth(v);
-     }
-      
-     const setHeightApp = v => {
-        console.log('set heigth app to ' + v);
-        setHeight(v);
-     }
-     
-     const setGetMazeApp = v => {
-      setGetMaze(v);
-     }
-
+  const setWidthApp = v => setWidth(v);
+  
+  const setHeightApp = v => setHeight(v);
+  
+  const setGetMazeApp = v => setGetMaze(true);
 
   useEffect(() => {
     if (getMaze) {
-      // dev
-      // fetch(`http://localhost:8080/generatemaze?height=${height}&width=${width}`)
-      // .then(response => {
-      //   if (response.ok) {
-      //     return response.json()
-      //   }
-      //   throw response;
-      // })
-      curlGraphService(height, width)
+      let authority;
+      if (dev) {
+        authority = "localhost:8080";
+      } else {
+        authority = "graph-api.hassu.us";
+      }
+      const url = `http://${authority}/generatemaze?height=${height}&width=${width}`
+      fetch(url)
+      .then(response => response.json())
       .then(res => {
         setGrid(res.grid);
         console.log(res);
+      })
+      .catch(e => {
+        alert(e);
       });
-      console.log(`Service was called, height:${height} width:${width}`);
+      console.debug(`Service was called, height:${height} width:${width}`);
+      setGetMaze(false);
     }
-    setGetMaze(false);
-    console.log(`App was re rendered, height:${height} width:${width}`);
-  }, [width, height, getMaze]);
+    console.log(`App was re rendered`);
+  }, [getMaze]);
   
   return (
     <div className="App">
