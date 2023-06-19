@@ -1,30 +1,22 @@
-import './Controls.css';
+import "./Controls.css";
 
-import React from 'react';
-import Slider from 'rc-slider';
-import Tooltip from 'rc-tooltip';
-import 'rc-slider/assets/index.css'
+import React from "react";
+import Slider from "rc-slider";
+import Tooltip from "rc-tooltip";
+import {  setMaze } from "./redux/mazeReducer";
+import { useDispatch } from "react-redux";
+import "rc-slider/assets/index.css";
 import "rc-tooltip/assets/bootstrap_white.css";
 
+const DEFAULT_HEIGHT = 10;
+const DEFAULT_WIDTH = 10;
+const dev = true;
+function Controls() {
+  let height = DEFAULT_HEIGHT;
+  let width = DEFAULT_WIDTH;
 
-// const handle = props => {
-//   const { value, dragging, index, ...restProps } = props;
-//   console.log(props);
-//   return (
-    
-//       <Handle value={value} {...restProps} />
-
-//   );
-// };
-
-
-
-
-function Controls({height, width, setHeight, setWidth, setGetMaze}) {
-
-const solveMaze = () => {}
-
-const Button = ({ onClick, children }) => {
+  const Button = ({ onClick, children }) => {
+    console.log("render a button");
     return (
       <button type="button" className="maze-btn" onClick={onClick}>
         {children}
@@ -32,55 +24,86 @@ const Button = ({ onClick, children }) => {
     );
   };
 
-const handleRenderHeight = (node, handleProps) => {
+  const handleRenderHeight = (node, handleProps) => {
     return (
-        <Tooltip
-          overlayInnerStyle={{ minHeight: "auto" }}
-          overlay={ `Height=${handleProps.value}`}
-          placement="top"
-        >
-          {node}
-        </Tooltip>
-      );
-    }
-    
+      <Tooltip
+        overlayInnerStyle={{ minHeight: "auto" }}
+        overlay={`Height=${handleProps.value}`}
+        placement="top"
+      >
+        {node}
+      </Tooltip>
+    );
+  };
 
-const handleRenderWidth = (node, handleProps) => {
+  const handleRenderWidth = (node, handleProps) => {
     return (
-        <Tooltip
-          overlayInnerStyle={{ minHeight: "auto" }}
-          overlay={`Width=${handleProps.value}`}
-          placement="top"
-        >
-          {node}
-        </Tooltip>
-      );
-    }
+      <Tooltip
+        overlayInnerStyle={{ minHeight: "auto" }}
+        overlay={`Width=${handleProps.value}`}
+        placement="top"
+      >
+        {node}
+      </Tooltip>
+    );
+  };
 
+  const dispatch = useDispatch();
+
+  const handleGenerateMaze = (val) => {
+    let authority;
+    if (dev) {
+      authority = "localhost:8080";
+    } else {
+      authority = "graph-api.hassu.us";
+    }
+    const url = `http://${authority}/generatemaze?height=${height}&width=${width}`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((res) => {
+        console.debug(`Service was called, height:${height} width:${width}`);
+        console.debug(res);
+        dispatch(setMaze(res));
+      })
+      .catch((e) => {
+        alert(e);
+      });
+  };
 
   return (
     <div className="controls">
-        <div className="sliders">
-            <div className="slider">
-                <p>Height</p>
-                <Slider min={2} max={100} defaultValue={height} onChange={setHeight} handleRender={handleRenderHeight}/>
-            </div>
-            <div className="slider">
-                <p>Width</p>
-                <Slider min={2} max={100} defaultValue={width} onChange={setWidth} handleRender={handleRenderWidth}/>
-            </div>
+      <div className="sliders">
+        <div className="slider">
+          <p>Height</p>
+          <Slider
+            min={2}
+            max={100}
+            defaultValue={height}
+            onChange={(v) => (height = v)}
+            handleRender={handleRenderHeight}
+          />
         </div>
-        <div className="buttons">
-            <div>
-                <Button onClick={setGetMaze}>Generate Maze !</Button>
-            </div>
-            <div>
-                <Button onClick={solveMaze}>Solve Maze For Me</Button>
-            </div>
+        <div className="slider">
+          <p>Width</p>
+          <Slider
+            min={2}
+            max={100}
+            defaultValue={width}
+            onChange={(v) => (width = v)}
+            handleRender={handleRenderWidth}
+          />
         </div>
+      </div>
+      <div className="buttons">
+        <div>
+          <Button onClick={handleGenerateMaze}>Generate Maze !</Button>
+        </div>
+        <div>
+          <Button onClick={console.debug}>Solve Maze For Me</Button>
+        </div>
+      </div>
     </div>
   );
-  
 }
 
 export default Controls;

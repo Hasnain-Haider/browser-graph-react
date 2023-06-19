@@ -9,5 +9,7 @@
 .row {
     flex-flow: row nowrap;
     display: flex;
-    flex: 1
+    flex: 1;
+    min-height: 2rem;
+    max-height: 3.5rem;
 }
