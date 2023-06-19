@@ -25,7 +25,6 @@ export const mazeSlice = createSlice({
 
 export const {
   setMaze,
-  shouldCallGraphApiSolve,
   shouldRenderMazeSolution,
   setMazeSolution,
   resetMaze,

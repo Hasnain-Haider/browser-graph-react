@@ -2,8 +2,8 @@
   text-align: center;
   justify-content: space-between;
   display: flex;
-  min-width: 90vh;
-  min-height: 90vh;
+  min-width: 85vh;
+  min-height: 85vh;
   margin: auto;
   flex-direction: column;
 }

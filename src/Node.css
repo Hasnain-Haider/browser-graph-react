@@ -6,7 +6,10 @@
   min-width: 2.5rem;
   max-height: 3.5rem;
   max-width: 3.5rem;
-  border: 1px dashed white;
+
+  border: 1px solid transparent;
+
+  
   flex-grow: 1;
 }
 

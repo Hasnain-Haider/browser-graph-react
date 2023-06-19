@@ -3,7 +3,7 @@ import "./Controls.css";
 import React from "react";
 import Slider from "rc-slider";
 import Tooltip from "rc-tooltip";
-import {  setMaze } from "./redux/mazeReducer";
+import { setMaze } from "./redux/mazeReducer";
 import { useDispatch } from "react-redux";
 import "rc-slider/assets/index.css";
 import "rc-tooltip/assets/bootstrap_white.css";
@@ -15,10 +15,15 @@ function Controls() {
   let height = DEFAULT_HEIGHT;
   let width = DEFAULT_WIDTH;
 
-  const Button = ({ onClick, children }) => {
-    console.log("render a button");
+  const Button = ({ onClick, children, disabled }) => {
+    console.debug("render a button");
     return (
-      <button type="button" className="maze-btn" onClick={onClick}>
+      <button
+        type="button"
+        className="maze-btn"
+        onClick={onClick}
+        disabled={disabled}
+      >
         {children}
       </button>
     );
@@ -95,12 +100,13 @@ function Controls() {
         </div>
       </div>
       <div className="buttons">
-        <div>
-          <Button onClick={handleGenerateMaze}>Generate Maze !</Button>
-        </div>
-        <div>
-          <Button onClick={console.debug}>Solve Maze For Me</Button>
-        </div>
+        <Button onClick={handleGenerateMaze} disabled={false}>
+          Generate Maze !
+        </Button>
+
+        <Button onClick={console.debug} disabled={true}>
+          Solve Maze For Me!
+        </Button>
       </div>
     </div>
   );

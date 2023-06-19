@@ -1,15 +1,21 @@
 .grid {
-    width: 90%;
-    display: flex;
-    height: 90%;
-    flex: 9 0 auto;
-    flex-direction: column;
+  /* width: 90%; */
+  display: flex;
+  width: 90vh;
+  height: 84vh;
+  align-self: center;
+  flex: 9 0 auto;
+  flex-direction: column;
+  overflow: hidden;
+  border: rgb(17, 0, 255) dotted 1px;
 }
 
 .row {
-    flex-flow: row nowrap;
-    display: flex;
-    flex: 1;
-    min-height: 2rem;
-    max-height: 3.5rem;
+  flex-flow: row nowrap;
+  display: flex;
+  flex: 1;
+}
+.react-transform-wrapper {
+  width: 100% !important;
+  height: 100% !important;
 }
