@@ -1,20 +1,15 @@
-.grid {
+.react-transform-wrapper {
+  width: 100vh !important;
+  height: 84vh !important;
+}
+
+.react-transform-component {
   display: flex;
-  align-self: center;
-  flex: 9 0 auto;
   flex-direction: column;
+  flex-wrap: nowrap;
 }
 
-.row {
-  flex-flow: row nowrap;
-  display: flex;
-  flex: 1;
-  min-height: 1.5rem;
-  min-width: 1.5rem;
-  max-height: 2.5rem;
-}
-
-.tool-btn {
+.tools button {
   align-items: center;
   appearance: none;
   background-color: #fff;

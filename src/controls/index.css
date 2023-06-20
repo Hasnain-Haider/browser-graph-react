@@ -1,0 +1,23 @@
+.controls {
+  width: auto;
+  height: 15vh;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.sliders {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.slider {
+  width: 40%;
+}

@@ -2,21 +2,18 @@
   display: flex;
   height: auto;
   width: auto;
-  min-height: 2.5rem;
-  min-width: 2.5rem;
-  max-height: 3.5rem;
-  max-width: 3.5rem;
-
-  border: 1px solid transparent;
-
-  
+  min-height: 1.5rem;
+  min-width: 1.5rem;
+  max-height: 2.5rem;
+  max-width: 2.5rem;
+  border: 2px solid transparent;
   flex-grow: 1;
 }
 
 .bottom {
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
 }
 
 .right {
-  border-right: 1px solid black;
+  border-right: 2px solid black;
 }

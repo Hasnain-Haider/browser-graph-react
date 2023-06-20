@@ -2,9 +2,8 @@ import "./Grid.css";
 import Node from "./Node";
 import React from "react";
 import { useSelector } from "react-redux";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
-function Grid() {
+export const Grid =  React.forwardRef((props, ref) => {
   const maze = useSelector((state) => state.maze.maze);
 
   const mapBoundariesToClassNames = (cell) => {
@@ -22,7 +21,7 @@ function Grid() {
     return classNames;
   };
 
-  const tg = () => {
+  const render = () => {
     console.debug("Render grid, height=", maze.grid.length);
     return maze.grid.map((row, rowIndex) => (
       <div className="row" key={rowIndex}>
@@ -39,39 +38,10 @@ function Grid() {
   };
 
   return (
-    <div className="grid">
-      <TransformWrapper
-        initialScale={1}
-        initialPositionX={100}
-        initialPositionY={100}
-        minPositionX={2000}
-        maxPositionX={2000}
-        minPositionY={-2000}
-        maxPositionY={-2000}
-        wheel={{ step: 0.08 }}
-        doubleClick={{ step: 0.2 }}
-        pinch={{ step: 1 }}
-        minScale={0.1}
-      >
-        {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
-          <React.Fragment>
-            <div className="tools">
-              <button className="tool-btn" onClick={() => zoomIn()}>
-                Zoom In +
-              </button>
-              <button className="tool-btn" onClick={() => zoomOut()}>
-                Zoom Out-
-              </button>
-              <button className="tool-btn" onClick={() => resetTransform()}>
-                Reset View x
-              </button>
-            </div>
-            <TransformComponent>{tg()}</TransformComponent>
-          </React.Fragment>
-        )}
-      </TransformWrapper>
+    <div ref={ref} className="grid">
+      {render()}
     </div>
   );
-}
+});
 
 export default Grid;

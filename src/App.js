@@ -1,11 +1,11 @@
 import './App.css';
-import Grid from './Grid';
-import Controls from './Controls';
+import ZoomableGrid from './ZoomableGrid';
+import Controls from './controls';
 
 function App() {
   return (
     <div className="App">
-      <Grid />
+      <ZoomableGrid />
       <Controls />
     </div>
   );
