@@ -7,7 +7,7 @@ import ReactToPrint from "react-to-print";
 function ZoomableGrid() {
   let componentRef = useRef(null);
   return (
-    <div>
+    <div className="zoomable-grid">
       <TransformWrapper
         initialScale={1}
         initialPositionX={200}

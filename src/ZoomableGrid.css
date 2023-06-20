@@ -9,6 +9,18 @@
   flex-wrap: nowrap;
 }
 
+.zoomable-grid {
+  display: flex;
+  justify-content: center;
+}
+
+.tools {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  z-index: 2;
+}
 .tools button {
   align-items: center;
   appearance: none;
@@ -42,5 +54,5 @@
   touch-action: manipulation;
   width: auto;
   will-change: transform, opacity;
-  z-index: 0;
+  z-index: 2;
 }
