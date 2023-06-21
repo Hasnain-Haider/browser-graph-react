@@ -8,8 +8,8 @@ import { useDispatch } from "react-redux";
 import { setHeight, setWidth, getInitialState } from "../redux/mazeReducer";
 const DEFAULT_HEIGHT = getInitialState().height;
 const DEFAULT_WIDTH = getInitialState().width;
-export default function Sliders() {
 
+export default function Sliders() {
   const dispatch = useDispatch();
 
   let width = DEFAULT_HEIGHT;
@@ -39,34 +39,29 @@ export default function Sliders() {
     );
   };
 
-  const render = _ => {
-    console.debug("render sliders");
-    return (
-        <div className="sliders">
-          <div className="slider">
-            <p>Height</p>
-            <Slider
-              min={2}
-              max={100}
-              defaultValue={height}
-              onChange={(v) => dispatch(setHeight(v))}
-              handleRender={handleRenderHeight}
-            />
-          </div>
-          <div className="slider">
-            <p>Width</p>
-            <Slider
-              min={2}
-              max={100}
-              defaultValue={width}
-              onChange={(v) => dispatch(setWidth(v))}
-              handleRender={handleRenderWidth}
-            />
-          </div>
-        </div>
-      );
-  }
-
-  return render();
-  
+  console.debug("render sliders");
+  return (
+    <div className="sliders">
+      <div className="slider">
+        <p>Height</p>
+        <Slider
+          min={2}
+          max={100}
+          defaultValue={height}
+          onChange={(v) => dispatch(setHeight(v))}
+          handleRender={handleRenderHeight}
+        />
+      </div>
+      <div className="slider">
+        <p>Width</p>
+        <Slider
+          min={2}
+          max={100}
+          defaultValue={width}
+          onChange={(v) => dispatch(setWidth(v))}
+          handleRender={handleRenderWidth}
+        />
+      </div>
+    </div>
+  );
 }

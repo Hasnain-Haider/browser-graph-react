@@ -3,7 +3,7 @@ import Node from "./Node";
 import React from "react";
 import { useSelector } from "react-redux";
 
-export const Grid =  React.forwardRef((props, ref) => {
+export const Grid = React.forwardRef((props, ref) => {
   const maze = useSelector((state) => state.maze.maze);
 
   const mapBoundariesToClassNames = (cell) => {
@@ -21,25 +21,20 @@ export const Grid =  React.forwardRef((props, ref) => {
     return classNames;
   };
 
-  const render = () => {
-    console.debug("Render grid, height=", maze.grid.length);
-    return maze.grid.map((row, rowIndex) => (
-      <div className="row" key={rowIndex}>
-        {row.map((cell, colIndex) => (
-          <Node
-            className={mapBoundariesToClassNames(cell)}
-            col={colIndex}
-            row={rowIndex}
-            key={`${colIndex},${rowIndex}`}
-          />
-        ))}
-      </div>
-    ));
-  };
-
   return (
     <div ref={ref} className="grid">
-      {render()}
+      {maze.grid.map((row, rowIndex) => (
+        <div className="row" key={rowIndex}>
+          {row.map((cell, colIndex) => (
+            <Node
+              className={mapBoundariesToClassNames(cell)}
+              col={colIndex}
+              row={rowIndex}
+              key={`${colIndex},${rowIndex}`}
+            />
+          ))}
+        </div>
+      ))}
     </div>
   );
 });

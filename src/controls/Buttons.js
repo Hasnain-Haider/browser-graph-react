@@ -7,13 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import "rc-slider/assets/index.css";
 import "rc-tooltip/assets/bootstrap_white.css";
 
-const dev = true;
+const dev = process.env.NODE_ENV !== "production";
 function Buttons() {
   const dispatch = useDispatch();
   let height = useSelector((state) => state.maze.height);
-  let width =  useSelector((state) => state.maze.width);
+  let width = useSelector((state) => state.maze.width);
 
-  const handleGenerateMaze = _ => {
+  const handleGenerateMaze = (_) => {
     let authority;
     if (dev) {
       authority = "localhost:8080";
@@ -34,15 +34,15 @@ function Buttons() {
   };
 
   return (
-      <div className="buttons">
-        <Button onClick={handleGenerateMaze} disabled={false}>
-          Generate Maze !
-        </Button>
+    <div className="buttons">
+      <Button onClick={handleGenerateMaze} disabled={false}>
+        Generate Maze !
+      </Button>
 
-        <Button onClick={console.debug} disabled={true}>
-          Solve Maze For Me!
-        </Button>
-      </div>
+      <Button onClick={console.debug} disabled={true}>
+        Solve Maze For Me!
+      </Button>
+    </div>
   );
 }
 

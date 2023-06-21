@@ -8,15 +8,11 @@ import "rc-tooltip/assets/bootstrap_white.css";
 import Sliders from "./Sliders";
 
 function Controls() {
-  const render = _ => {
-    console.debug("in s");
     return(    
     <div className="controls">
       <Sliders />
       <Buttons/>
   </div>);
-  }
-  return render();
 }
 
 export default Controls;
