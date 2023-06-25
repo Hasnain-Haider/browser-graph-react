@@ -24,8 +24,6 @@ function Buttons() {
     fetch(url)
       .then((response) => response.json())
       .then((res) => {
-        console.debug(`Service was called, height:${height} width:${width}`);
-        console.debug(res);
         dispatch(setMaze(res));
       })
       .catch((e) => {
@@ -40,7 +38,7 @@ function Buttons() {
       </Button>
 
       <Button onClick={console.debug} disabled={true}>
-        Solve Maze For Me!
+        Solve Maze For Me! Coming Soon...
       </Button>
     </div>
   );
