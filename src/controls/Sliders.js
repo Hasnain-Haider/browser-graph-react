@@ -39,7 +39,6 @@ export default function Sliders() {
     );
   };
 
-  console.debug("render sliders");
   return (
     <div className="sliders">
       <div className="slider">

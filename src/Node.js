@@ -1,4 +1,5 @@
 import "./Node.css";
+import React from "react";
 
 function Node(props) {
   let className = "";

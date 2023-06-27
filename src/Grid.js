@@ -21,6 +21,38 @@ export const Grid = React.forwardRef((props, ref) => {
     return classNames;
   };
 
+  let mazeToRender = new Array(maze.height + 1);
+  mazeToRender.fill([], 0, maze.height + 1);
+  for (let i in mazeToRender) {
+    mazeToRender[i] = new Array(maze.width + 1);
+  }
+
+  if (maze.grid.length !== 0) {
+    let { height, width, grid } = maze;
+    for (let r = 0; r < height + 1; r++) {
+      for (let c = 0; c < width + 1; c++) {
+        if (c !== 0 && r !== 0) {
+          mazeToRender[r][c] = grid[r - 1][c - 1];
+        } else {
+          let bounds = ["R", "B"];
+          if (r === 0) {
+            bounds = bounds.filter((x) => x === "B");
+          }
+          if (c === 0) {
+            bounds = bounds.filter((x) => x === "R");
+          }
+          mazeToRender[r][c] = { bounds };
+        }
+      }
+    }
+    let [er, ec] = maze.entrance;
+    if (height >= width) {
+      mazeToRender[0][ec + 1] = { bounds: [] };
+    } else {
+      mazeToRender[er + 1][0] = { bounds: [] };
+    }
+  }
+
   return (
     <div ref={ref} className="grid">
       {maze.grid.map((row, rowIndex) => (
