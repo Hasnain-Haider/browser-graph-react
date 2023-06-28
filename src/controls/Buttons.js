@@ -26,9 +26,7 @@ function Buttons() {
       .then((res) => {
         dispatch(setMaze(res));
       })
-      .catch((e) => {
-        alert(e);
-      });
+      .catch(alert);
   };
 
   return (

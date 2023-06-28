@@ -55,7 +55,7 @@ export const Grid = React.forwardRef((props, ref) => {
 
   return (
     <div ref={ref} className="grid">
-      {maze.grid.map((row, rowIndex) => (
+      {mazeToRender.map((row, rowIndex) => (
         <div className="row" key={rowIndex}>
           {row.map((cell, colIndex) => (
             <Node
