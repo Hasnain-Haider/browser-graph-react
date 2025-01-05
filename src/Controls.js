@@ -20,7 +20,7 @@ import "rc-tooltip/assets/bootstrap_white.css";
 
 
 
-function Controls({height, width, setHeight, setWidth, setGetMaze}) {
+function Controls({height, width, setHeight, setWidth, setGetMaze, clearSelected}) {
 
 const solveMaze = () => {}
 
@@ -77,10 +77,13 @@ const handleRenderWidth = (node, handleProps) => {
             <div>
                 <Button onClick={solveMaze}>Solve Maze For Me</Button>
             </div>
+            <div>
+                <Button onClick={clearSelected}>Clear Selected</Button>
+            </div>
         </div>
     </div>
   );
-  
+
 }
 
 export default Controls;

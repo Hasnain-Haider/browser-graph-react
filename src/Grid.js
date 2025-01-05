@@ -1,8 +1,7 @@
 import './Grid.css';
 import Node from './Node';
-import { useEffect, useState } from 'react';
 
-function Grid({grid}) {
+function Grid({grid, clickedNodes, onNodeClick}) {
     const mapBoundariesToClassNames = cell => {
       let classNames = "";
       for (const boundary of cell.bounds) {
@@ -18,12 +17,14 @@ function Grid({grid}) {
       return classNames;
     }
 
-
-    
     const renderGrid = () => grid.map((row, rowIndex) => (
         <div className="row" key={rowIndex}>
         {
-            row.map((cell, colIndex) => <Node className={mapBoundariesToClassNames(cell)} col={colIndex} row={rowIndex} key={`${colIndex},${rowIndex}`}/>)
+            row.map((cell, colIndex) => {
+              const isSelected = clickedNodes.some(node => node[0] === rowIndex && node[1] === colIndex);
+              return <Node className={mapBoundariesToClassNames(cell)} col={colIndex} row={rowIndex}
+                           key={`${colIndex},${rowIndex}`} onClick={onNodeClick} isSelected={isSelected} />
+            })
         }
         </div>
     ));
@@ -34,7 +35,5 @@ function Grid({grid}) {
     </div>
   );
 }
-
-
 
 export default Grid;

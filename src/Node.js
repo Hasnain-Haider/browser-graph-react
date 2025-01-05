@@ -7,12 +7,16 @@ function Node(props) {
   } else {
     className = "node";
   }
+  if (props.isSelected) {
+    className = `${className} selected`;
+  }
   return (
-    <div 
+    <div
       className={className}
-      row={props.row} 
-      col={props.col} 
+      row={props.row}
+      col={props.col}
       id={`${props.row},${props.col}`}
+      onClick={() => props.onClick(props.row, props.col)}
      />
   );
 }

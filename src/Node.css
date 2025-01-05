@@ -15,3 +15,7 @@
 .right {
     border-right: 1px solid black;
 }
+
+.node.selected {
+    background-color: rgba(255, 255, 0, 0.5); /* transparent yellow */
+}
