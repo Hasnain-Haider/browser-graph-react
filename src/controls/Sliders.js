@@ -45,7 +45,7 @@ export default function Sliders() {
         <p>Height</p>
         <Slider
           min={2}
-          max={100}
+          max={30}
           defaultValue={height}
           onChange={(v) => dispatch(setHeight(v))}
           handleRender={handleRenderHeight}
@@ -55,7 +55,7 @@ export default function Sliders() {
         <p>Width</p>
         <Slider
           min={2}
-          max={100}
+          max={30}
           defaultValue={width}
           onChange={(v) => dispatch(setWidth(v))}
           handleRender={handleRenderWidth}
