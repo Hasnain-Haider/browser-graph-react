@@ -6,6 +6,7 @@ const initialState = {
   mazeSolution: [],
   height: 2,
   width: 2,
+  selectedNodes: [],
 };
 
 export const getInitialState = () => initialState;
@@ -32,6 +33,18 @@ export const mazeSlice = createSlice({
     setHeight: (state, action) => {
       state.height = action.payload;
     },
+    toggleNodeSelection: (state, action) => {
+      const { row, col } = action.payload;
+      const index = state.selectedNodes.findIndex(node => node.row === row && node.col === col);
+      if (index !== -1) {
+        state.selectedNodes.splice(index, 1);
+      } else {
+        state.selectedNodes.push({ row, col });
+      }
+    },
+    clearSelectedNodes: (state) => {
+      state.selectedNodes = [];
+    },
   },
 });
 
@@ -42,6 +55,8 @@ export const {
   resetMaze,
   setHeight,
   setWidth,
+  toggleNodeSelection,
+  clearSelectedNodes,
 } = mazeSlice.actions;
 
 export default mazeSlice.reducer;

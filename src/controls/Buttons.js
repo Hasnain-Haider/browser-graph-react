@@ -2,7 +2,7 @@ import "./Buttons.css";
 
 import React from "react";
 import Button from "./Button";
-import { setMaze } from "../redux/mazeReducer";
+import { setMaze, clearSelectedNodes } from "../redux/mazeReducer";
 import { useDispatch, useSelector } from "react-redux";
 import "rc-slider/assets/index.css";
 import "rc-tooltip/assets/bootstrap_white.css";
@@ -14,6 +14,7 @@ function Buttons() {
   let width = useSelector((state) => state.maze.width);
 
   const handleGenerateMaze = (_) => {
+    handleClearSelected();
     let authority;
     if (dev) {
       authority = "localhost:8080";
@@ -29,16 +30,22 @@ function Buttons() {
       .catch(alert);
   };
 
-  return (
-    <div className="buttons">
-      <Button onClick={handleGenerateMaze} disabled={false}>
-        Generate Maze !
-      </Button>
+  const handleClearSelected = () => {
+    dispatch(clearSelectedNodes());
+  };
 
-      <Button onClick={console.debug} disabled={true}>
-        Solve Maze For Me! Coming Soon...
-      </Button>
-    </div>
+  return (
+      <div className="buttons">
+          <Button onClick={handleGenerateMaze} disabled={false}>
+              Generate Maze !
+          </Button>
+
+          <Button onClick={console.debug} disabled={true}>
+              Solve Maze For Me! Coming Soon...
+          </Button>
+
+          <Button onClick={handleClearSelected}>Clear Selected</Button>
+      </div>
   );
 }
 

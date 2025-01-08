@@ -4,7 +4,7 @@ import Grid from "./Grid";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import ReactToPrint from "react-to-print";
 
-function ZoomableGrid() {
+function ZoomableGrid({handleNodeClick}) {
   let componentRef = useRef(null);
   return (
     <div className="zoomable-grid">
@@ -12,11 +12,16 @@ function ZoomableGrid() {
         initialScale={1}
         initialPositionX={200}
         initialPositionY={200}
+        maxPositionX={1000}
+        maxPositionY={1000}
+        minPositionX={-1000}
+        minPositionY={-1000}
         wheel={{ step: 0.06 }}
         doubleClick={{ step: 0.2 }}
-        pinch={{ step: 1 }}
-        minScale={0.1}
+        pinch={{ step: 0.2 }}
+        minScale={0.2}
       >
+
         {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
           <React.Fragment>
             <div className="tools">
@@ -37,7 +42,7 @@ function ZoomableGrid() {
             </div>
 
             <TransformComponent>
-              <Grid ref={componentRef} />
+              <Grid handleNodeClick={handleNodeClick} ref={componentRef} />
             </TransformComponent>
           </React.Fragment>
         )}

@@ -19,5 +19,23 @@
 }
 
 .node.selected {
-    background-color: rgba(255, 255, 0, 0.5); /* transparent yellow */
+    background-color: rgba(255, 255, 0, 0.3); /* transparent yellow */
+}
+
+.node.entrance {
+    background-color: rgba(0, 255, 0, 0.18); /* transparent green */
+}
+
+.node.exit {
+    background-color: rgba(255, 0, 0, 0.18); /* transparent red */
+}
+
+/*selected exit node should mix the colors of the selected and exit nodes*/
+.node.selected.exit {
+    background-color: rgba(255, 0, 0, 0.3); /* transparent red */
+}
+
+/*selected entrance node should mix the colors of the selected and entrance nodes*/
+.node.selected.entrance {
+    background-color: rgba(0, 255, 0, 0.3); /* transparent green */
 }
