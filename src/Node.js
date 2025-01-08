@@ -1,7 +1,8 @@
-import './Node.css';
+import "./Node.css";
+import React from "react";
 
 function Node(props) {
-  let className = '';
+  let className = "";
   if (props.className) {
     className = `${props.className} node`;
   } else {
@@ -16,8 +17,7 @@ function Node(props) {
       row={props.row}
       col={props.col}
       id={`${props.row},${props.col}`}
-      onClick={() => props.onClick(props.row, props.col)}
-     />
+    />
   );
 }
 

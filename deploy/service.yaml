@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cloud.google.com/network-tier: Standard
+  name: graph-react-2-service
+  labels:
+    app: graph-react-2
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 35.212.191.164
+  selector:
+    app: graph-react-2
+  ports:
+    - port: 80
+      targetPort: 3000

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graph-react-2-deployment
+  labels:
+    app: graph-react-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: graph-react-2
+  template:
+    metadata:
+      labels:
+        app: graph-react-2
+    spec:
+      containers:
+        - name: graph-react-container
+          image: gcr.io/sturdy-index-386400/graph-react:latest
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: 300m
+              memory: 2Gi
+              ephemeral-storage: 2Gi

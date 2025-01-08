@@ -1,0 +1,31 @@
+steps:
+  # Fetch source code from GitHub
+  - name: "gcr.io/cloud-builders/git"
+    args:
+      - clone
+      - "https://github.com/Hasnain-Haider/graph-react.git"
+
+  # Build the Docker image
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - build
+      - -t
+      - "gcr.io/sturdy-index-386400/graph-react:$SHORT_SHA"
+      - graph-react
+
+  # Push the Docker image to Container Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - push
+      - "gcr.io/sturdy-index-386400/graph-react:$SHORT_SHA"
+
+  # Update the image in the Kubernetes Deployment
+  - name: "gcr.io/cloud-builders/kubectl"
+    args:
+      - set
+      - image
+      - deployment/graph-react-2-deployment
+      - "graph-react-container=gcr.io/sturdy-index-386400/graph-react:$SHORT_SHA"
+    env:
+      - "CLOUDSDK_COMPUTE_REGION=us-west1"
+      - "CLOUDSDK_CONTAINER_CLUSTER=cluster-1"

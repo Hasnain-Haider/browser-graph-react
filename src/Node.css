@@ -1,19 +1,21 @@
 .node {
-    display: flex;
-    height: auto;
-    width:  auto;
-    border: 1px dashed white ;
-    min-width: 4px;
-    min-height: 4px;
-    flex-grow: 1;
+  display: flex;
+  height: auto;
+  width: auto;
+  min-height: 1.5rem;
+  min-width: 1.5rem;
+  max-height: 2.5rem;
+  max-width: 2.5rem;
+  border: 2px solid transparent;
+  flex-grow: 1;
 }
 
 .bottom {
-    border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
 }
 
 .right {
-    border-right: 1px solid black;
+  border-right: 2px solid black;
 }
 
 .node.selected {
