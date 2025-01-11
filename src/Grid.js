@@ -14,7 +14,6 @@ export const Grid = React.forwardRef((props, ref) => {
     const [entranceRow, entranceCol] = entrance;
     const [exitRow, exitCol] = exit;
     const {rowIndex, colIndex, boundaries} = cell;
-    console.log({entrance, exit, cell});
     let classNames = "";
     for (const boundary of boundaries) {
       if (classNames !== "") {
@@ -68,6 +67,10 @@ export const Grid = React.forwardRef((props, ref) => {
   }
   const { entrance, exit } = maze;
 
+  console.log({maze});
+  // console.log(maze.grid)
+  console.log({mazeToRender});
+
   return (
     <div ref={ref} className="grid">
       {mazeToRender.map((row, rowIndex) => (
@@ -75,6 +78,7 @@ export const Grid = React.forwardRef((props, ref) => {
           {row.map((cell, colIndex) => (
             <Node
               classNameProp={mapBoundariesToClassNames( {...cell, rowIndex, colIndex}, entrance, exit)}
+              _id={cell.id}
               col={colIndex}
               row={rowIndex}
               key={`${colIndex},${rowIndex}`}

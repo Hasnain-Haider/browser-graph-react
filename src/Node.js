@@ -1,16 +1,16 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleNodeSelection } from "./redux/mazeReducer";
 import "./Node.css";
 
-function Node({ row, col, classNameProp }) {
+function Node({ row, col, classNameProp, _id}) {
   const dispatch = useDispatch();
   const selectedNodes = useSelector((state) => state.maze.selectedNodes);
 
   const isSelected = selectedNodes.some(node => node.row === row && node.col === col);
 
   const handleClick = () => {
-    dispatch(toggleNodeSelection({ row, col }));
+    dispatch(toggleNodeSelection({ row, col, _id }));
   };
 
   let className = "";
@@ -19,7 +19,6 @@ function Node({ row, col, classNameProp }) {
   } else {
     className = "node";
   }
-
   if (isSelected) {
     className = `${className} selected`
   }

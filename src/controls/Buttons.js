@@ -10,8 +10,11 @@ import "rc-tooltip/assets/bootstrap_white.css";
 const dev = process.env.NODE_ENV !== "production";
 function Buttons() {
   const dispatch = useDispatch();
-  let height = useSelector((state) => state.maze.height);
-  let width = useSelector((state) => state.maze.width);
+  let height = useSelector((state) => state.maze.sliderHeight);
+  let width = useSelector((state) => state.maze.sliderWidth);
+  let nodesSelected = useSelector((state) => state.maze.selectedNodes);
+  let graph = useSelector((state) => state.maze.maze.graph);
+  let seed = useSelector(state => state.maze.maze.seed);
 
   const handleGenerateMaze = (_) => {
     handleClearSelected();
@@ -21,7 +24,7 @@ function Buttons() {
     } else {
       authority = "graph-api.hassu.us";
     }
-    const url = `http://${authority}/generatemaze?height=${height}&width=${width}`;
+    const url = `http://${authority}/maze/generate?height=${height}&width=${width}`;
     fetch(url)
       .then((response) => response.json())
       .then((res) => {
@@ -29,6 +32,41 @@ function Buttons() {
       })
       .catch(alert);
   };
+
+  const handleSubmitSolution = (_) => {
+      let authority;
+        if (dev) {
+            authority = "localhost:8080";
+        } else {
+            authority = "graph-api.hassu.us";
+        }
+        const url = `http://${authority}/maze/solve`;
+        const nodes = nodesSelected.map(node => { return { row: node.row, col: node.col, id: node._id } });
+        const payload = {
+            nodes,
+            height,
+            width,
+            seed,
+            graph
+        };
+
+      console.log({payload});
+
+      fetch(url, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+      })
+      .catch((error) => {
+          console.error('Error:', error);
+      });
+  }
 
   const handleClearSelected = () => {
     dispatch(clearSelectedNodes());
@@ -40,8 +78,8 @@ function Buttons() {
               Generate Maze !
           </Button>
 
-          <Button onClick={console.debug} disabled={true}>
-              Solve Maze For Me! Coming Soon...
+          <Button onClick={handleSubmitSolution} disabled={false}>
+              Solve Maze !
           </Button>
 
           <Button onClick={handleClearSelected}>Clear Selected</Button>

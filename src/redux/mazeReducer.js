@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  maze: { grid: [], entrance: [], exit: [], height: 2, width: 2 },
+  maze: { grid: [], entrance: [], exit: [], height: 2, width: 2, graph: {}, seed: 0 },
+  sliderHeight: 4,
+  sliderWidth: 4,
   renderMazeSolution: false,
   mazeSolution: [],
-  height: 2,
-  width: 2,
   selectedNodes: [],
 };
 
-export const getInitialState = () => initialState;
+// export const getInitialState = () => initialState;
 
 export const mazeSlice = createSlice({
   name: "maze",
@@ -27,19 +27,20 @@ export const mazeSlice = createSlice({
     resetMaze: (state) => {
       state = initialState;
     },
-    setWidth: (state, action) => {
-      state.width = action.payload;
+    setSliderWidth: (state, action) => {
+      state.sliderWidth = action.payload;
     },
-    setHeight: (state, action) => {
-      state.height = action.payload;
+    setSliderHeight: (state, action) => {
+      state.sliderHeight = action.payload;
     },
+
     toggleNodeSelection: (state, action) => {
-      const { row, col } = action.payload;
-      const index = state.selectedNodes.findIndex(node => node.row === row && node.col === col);
+      const { row, col, _id } = action.payload;
+      const index = state.selectedNodes.findIndex(node => node.row === row && node.col === col && node._id === _id);
       if (index !== -1) {
         state.selectedNodes.splice(index, 1);
       } else {
-        state.selectedNodes.push({ row, col });
+        state.selectedNodes.push({ row, col, _id });
       }
     },
     clearSelectedNodes: (state) => {
@@ -53,8 +54,8 @@ export const {
   shouldRenderMazeSolution,
   setMazeSolution,
   resetMaze,
-  setHeight,
-  setWidth,
+  setSliderWidth,
+  setSliderHeight,
   toggleNodeSelection,
   clearSelectedNodes,
 } = mazeSlice.actions;

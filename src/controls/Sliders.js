@@ -5,15 +5,10 @@ import React from "react";
 import "rc-slider/assets/index.css";
 import "rc-tooltip/assets/bootstrap_white.css";
 import { useDispatch } from "react-redux";
-import { setHeight, setWidth, getInitialState } from "../redux/mazeReducer";
-const DEFAULT_HEIGHT = getInitialState().height;
-const DEFAULT_WIDTH = getInitialState().width;
+import {setSliderHeight, setSliderWidth} from "../redux/mazeReducer";
 
 export default function Sliders() {
   const dispatch = useDispatch();
-
-  let width = DEFAULT_HEIGHT;
-  let height = DEFAULT_WIDTH;
 
   const handleRenderHeight = (node, handleProps) => {
     return (
@@ -46,8 +41,8 @@ export default function Sliders() {
         <Slider
           min={2}
           max={30}
-          defaultValue={height}
-          onChange={(v) => dispatch(setHeight(v))}
+          defaultValue={4}
+          onChange={(v) => dispatch(setSliderHeight(v))}
           handleRender={handleRenderHeight}
         />
       </div>
@@ -56,8 +51,8 @@ export default function Sliders() {
         <Slider
           min={2}
           max={30}
-          defaultValue={width}
-          onChange={(v) => dispatch(setWidth(v))}
+          defaultValue={4}
+          onChange={(v) => dispatch(setSliderWidth(v))}
           handleRender={handleRenderWidth}
         />
       </div>
